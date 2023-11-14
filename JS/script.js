@@ -7,7 +7,7 @@ const loadData = async () => {
 
 const showdisplayData = (data) => {
     // data = data.slice(0, 6)
-    const universeParent = document.getElementById('universe_parent'); 
+    const universeParent = document.getElementById('universe_parent');
     data.forEach(data => {
 
         const eachDiv = document.createElement('div');
@@ -19,7 +19,7 @@ const showdisplayData = (data) => {
             <p>2. ${data.features[1]}</p> 
             <p>3. ${data?.features[2]}</p> 
             <hr class="mt-5"/> 
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center" onclick="my_modal_1.showModal(), loadModalData('${data.id}')">
                 <div> 
                     <p class="mt-5 font-bold text-xl text-gray-600">${data.name}</p>
                     <p class="mt-2">Date: ${data.published_in}</p>                
@@ -33,6 +33,53 @@ const showdisplayData = (data) => {
     })
 }
 
- 
+const loadModalData = async (id) => {
+    const url = ` https://openapi.programming-hero.com/api/ai/tool/${id}`;
+    const res = await fetch(url);
+    const data = await res.json()
+    showModalData(data)
+}
+
+const showModalData = (data) => {  
+    const modalLeft = document.getElementById('modal_left');
+    modalLeft.innerHTML = `
+            <p class="text-2xl font-bold">${data.data.description}</p>
+            <div class="md:flex items-center mt-5 gap-5">
+                <div class="flex flex-col item-center justify-center bg-white w-[130px] h-[100px] p-3 rounded text-center text-green-600 font-bold"> 
+                    <p>${data.data.pricing[0].price}</p>
+                    <p>${data.data.pricing[0].plan}</p> 
+                </div>
+                <div class="md:mt-0 mt-2 flex flex-col item-center justify-center bg-white w-[130px] h-[100px] p-3 rounded text-center text-orange-600 font-bold">
+                    <p>${data.data.pricing[1].price}</p>
+                    <p>${data.data.pricing[1].plan}</p> 
+                </div>
+                <div class="md:mt-0 mt-2 flex flex-col item-center justify-center bg-white w-[130px] h-[100px] p-3 rounded text-center text-red-600 font-bold">
+                    <p>${data.data.pricing[2].price}</p>
+                    <p>${data.data.pricing[2].plan}</p> 
+                </div>
+            </div>
+
+            <div class="md:flex justify-between mt-5">
+                <div>
+                    <p class="text-2xl font-bold text-gray-600">Features</p>
+                    <ul class="mt-3">
+                        <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.features['1'].feature_name}</li>
+                        <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.features['2'].feature_name}</li>
+                        <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.features['3'].feature_name}</li>
+                    </ul>
+                </div>
+                <div class="md:mt-0 mt-2">
+                    <p class="text-2xl font-bold text-gray-600">Integrations</p>
+                    <ul class="mt-3">
+                        <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.integrations[0]}</li>
+                        <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.integrations[1]}</li>
+                        <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.integrations[2]}</li>
+                    </ul>
+                </div>
+            </div>
+        `
+
+}
+
 
 loadData()
