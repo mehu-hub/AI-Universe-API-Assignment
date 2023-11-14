@@ -6,9 +6,10 @@ const loadData = async () => {
 }
 
 const showdisplayData = (data) => {
-    console.log(data)
-    const universeParent = document.getElementById('universe_parent');
+    // data = data.slice(0, 6)
+    const universeParent = document.getElementById('universe_parent'); 
     data.forEach(data => {
+
         const eachDiv = document.createElement('div');
         eachDiv.classList.add('each-div')
         eachDiv.innerHTML = `
@@ -31,5 +32,7 @@ const showdisplayData = (data) => {
         universeParent.appendChild(eachDiv)
     })
 }
+
+ 
 
 loadData()
