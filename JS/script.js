@@ -7,6 +7,7 @@ const loadData = async () => {
 
 const showdisplayData = (data) => {
     // data = data.slice(0, 6)
+
     const universeParent = document.getElementById('universe_parent');
     data.forEach(data => {
 
@@ -31,7 +32,7 @@ const showdisplayData = (data) => {
         `
         universeParent.appendChild(eachDiv)
     })
-}
+} 
 
 const loadModalData = async (id) => {
     const url = ` https://openapi.programming-hero.com/api/ai/tool/${id}`;
@@ -40,46 +41,59 @@ const loadModalData = async (id) => {
     showModalData(data)
 }
 
-const showModalData = (data) => {  
+const showModalData = (data) => {
+    console.log(data.data.image_link[1])
     const modalLeft = document.getElementById('modal_left');
     modalLeft.innerHTML = `
-            <p class="text-2xl font-bold">${data.data.description}</p>
-            <div class="md:flex items-center mt-5 gap-5">
-                <div class="flex flex-col item-center justify-center bg-white w-[130px] h-[100px] p-3 rounded text-center text-green-600 font-bold"> 
-                    <p>${data.data.pricing[0].price}</p>
-                    <p>${data.data.pricing[0].plan}</p> 
-                </div>
-                <div class="md:mt-0 mt-2 flex flex-col item-center justify-center bg-white w-[130px] h-[100px] p-3 rounded text-center text-orange-600 font-bold">
-                    <p>${data.data.pricing[1].price}</p>
-                    <p>${data.data.pricing[1].plan}</p> 
-                </div>
-                <div class="md:mt-0 mt-2 flex flex-col item-center justify-center bg-white w-[130px] h-[100px] p-3 rounded text-center text-red-600 font-bold">
-                    <p>${data.data.pricing[2].price}</p>
-                    <p>${data.data.pricing[2].plan}</p> 
-                </div>
-            </div>
+            <div>
 
-            <div class="md:flex justify-between mt-5">
                 <div>
-                    <p class="text-2xl font-bold text-gray-600">Features</p>
-                    <ul class="mt-3">
-                        <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.features['1'].feature_name}</li>
-                        <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.features['2'].feature_name}</li>
-                        <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.features['3'].feature_name}</li>
-                    </ul>
+                    <div>
+                        <img src="${data.data.image_link[0]}"/>
+                    </div>
                 </div>
-                <div class="md:mt-0 mt-2">
-                    <p class="text-2xl font-bold text-gray-600">Integrations</p>
-                    <ul class="mt-3">
-                        <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.integrations[0]}</li>
-                        <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.integrations[1]}</li>
-                        <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.integrations[2]}</li>
-                    </ul>
+                <div class="mt-2">
+                <p class="text-2xl font-bold">${data.data.description}</p>
+                <div class="md:flex items-center mt-5 gap-5">
+                    <div class="flex flex-col item-center justify-center bg-white md:w-[130px] md:h-[100px] p-3 rounded text-center text-green-600 font-bold"> 
+                        <p>${data.data.pricing[0].price}</p>
+                        <p>${data.data.pricing[0].plan}</p> 
+                    </div>
+                    <div class="md:mt-0 mt-2 flex flex-col item-center justify-center bg-white md:w-[130px] md:h-[100px] p-3 rounded text-center text-orange-600 font-bold">
+                        <p>${data.data.pricing[1].price}</p>
+                        <p>${data.data.pricing[1].plan}</p> 
+                    </div>
+                    <div class="md:mt-0 mt-2 flex flex-col item-center justify-center bg-white md:w-[130px] md:h-[100px] p-3 rounded text-center text-red-600 font-bold">
+                        <p>${data.data.pricing[2].price}</p>
+                        <p>${data.data.pricing[2].plan}</p> 
+                    </div>
                 </div>
+    
+                <div class="md:flex justify-between mt-5">
+                    <div>
+                        <p class="text-2xl font-bold text-gray-600">Features</p>
+                        <ul class="mt-3">
+                            <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.features['1'].feature_name}</li>
+                            <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.features['2'].feature_name}</li>
+                            <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.features['3'].feature_name}</li>
+                        </ul>
+                    </div>
+                    <div class="md:mt-0 mt-2">
+                        <p class="text-2xl font-bold text-gray-600">Integrations</p>
+                        <ul class="mt-3">
+                            <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.integrations[0]}</li>
+                            <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.integrations[1]}</li>
+                            <li><i class="fa-solid fa-circle-check text-[12px] text-gray-600"></i> ${data.data.integrations[2]}</li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+                
             </div>
         `
 
 }
+
 
 
 loadData()
