@@ -14,7 +14,7 @@ const showdisplayData = (data) => {
         const eachDiv = document.createElement('div');
         eachDiv.classList.add('each-div')
         eachDiv.innerHTML = `
-            <img class="w-full md:h-[300px] h-[200px]" src="${data.image}"/>
+            <img class="w-full md:h-[290px] h-[200px]" src="${data.image}"/>
             <h2 class="mt-5 font-bold text-xl">Features</h2>
             <p class="mt-2">1. ${data.features[0]}</p> 
             <p>2. ${data.features[1]}</p> 
