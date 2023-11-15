@@ -6,7 +6,7 @@ const loadData = async () => {
 }
 
 const showdisplayData = (data) => {
-    // data = data.slice(0, 6)
+    data = data.slice(0, 6)
 
     const universeParent = document.getElementById('universe_parent');
     data.forEach(data => {
